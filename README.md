@@ -1,16 +1,29 @@
-# Visualize Blood Pressure
+# Visualize Blood Pressure Readings
 
-This React app helps to **visualize "Omron Blood Pressure Readings" Export Data** in a convenient way to understand blood pressure trends.
+This **React app** helps to **visualize "Omron Blood Pressure Readings" Export Data** in an easy-to-understand format. 
 
-The application converts the raw data from your Omron device into graphical representations and summaries.
+The app transforms raw data from your Omron device into **interactive graphs and summaries** to help you monitor and analyze your blood pressure trends.
+
+Online demo: [https://vpnry.github.io/visualize-blood-pressure/](https://vpnry.github.io/visualize-blood-pressure/)
+
+
+![Visualize Blood Pressure Readings](vbp.png)
+
+## Privacy
+
+- Your data remains completely private and never leaves your browser.
+
+- You can also [download this HTML app](https://github.com/vpnry/visualize-blood-pressure/archive/refs/heads/master.zip) and run it offline.
+
 
 ## How to Export CSV from OMRON App
 
 - Open OMRON Connect app
 - Select your blood pressure measurement history
-- Look for "Export" measurement data or "Share" option
+- Look for **Export** measurement data or **Share** option
 - Choose CSV file format
-- Upload the exported CSV file here
+- Once exported, upload the CSV file into this app to visualize your data.
+- Your data remains completely private and never leaves your browser.
 
 ## Devs
 1. **Clone this Repository**:
@@ -19,7 +32,7 @@ The application converts the raw data from your Omron device into graphical repr
    ```
 2. **Navigate to the Project Directory**:
    ```bash
-   cd visualize-bp
+   cd visualize-blood-pressure
 
    ```
 3. **Install Dependencies**:
@@ -28,7 +41,7 @@ The application converts the raw data from your Omron device into graphical repr
    npm install
    npx tailwindcss init -p
 
-   ```
+   ```for added privacy
 4. **Start the App**:
    ```bash
    npm start
