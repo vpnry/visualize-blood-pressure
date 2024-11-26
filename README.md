@@ -28,7 +28,7 @@ Online demo: [https://vpnry.github.io/visualize-blood-pressure/](https://vpnry.g
 ## Devs
 1. **Clone this Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/vpnry/visualize-blood-pressure.git
    ```
 2. **Navigate to the Project Directory**:
    ```bash
@@ -37,11 +37,10 @@ Online demo: [https://vpnry.github.io/visualize-blood-pressure/](https://vpnry.g
    ```
 3. **Install Dependencies**:
    ```bash
-
    npm install
    npx tailwindcss init -p
 
-   ```for added privacy
+   ```
 4. **Start the App**:
    ```bash
    npm start
@@ -52,4 +51,4 @@ Online demo: [https://vpnry.github.io/visualize-blood-pressure/](https://vpnry.g
 
 - Code is generated with [Claude](https://claude.ai/chat) 
 
-- Icon is generated with [FLUX.1-dev](https://huggingface.co/spaces/black-forest-labs/FLUX.1-dev)
+- Icon is generated with [FLUX.1-dev](https://huggingface.co/spaces/black-forest-labs/FLUX.1-dev) & [https://icon.kitchen](https://icon.kitchen/)
