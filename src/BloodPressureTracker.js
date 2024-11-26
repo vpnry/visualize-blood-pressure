@@ -5,15 +5,14 @@ import Papa from "papaparse";
 const BloodPressureTracker = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  const [fileUploaded, setFileUploaded] = useState(false);
 
   const safeParseDate = (dateString) => {
     try {
-      // Split the date string and create a new Date object
       const [datePart, timePart] = dateString.split(" ");
       const [year, month, day] = datePart.split("/");
       const [hours, minutes] = timePart.split(":");
 
-      // Months are 0-indexed in JS Date
       return new Date(year, month - 1, day, hours, minutes);
     } catch (err) {
       console.error("Date parsing error:", err);
@@ -28,9 +27,8 @@ const BloodPressureTracker = () => {
         header: true,
         complete: (results) => {
           try {
-            // Process and transform the data
             const processedData = results.data
-              .filter((row) => row["Measurement Date"]) // Remove empty rows
+              .filter((row) => row["Measurement Date"])
               .map((row) => {
                 const datetime = safeParseDate(row["Measurement Date"]);
                 return datetime
@@ -42,17 +40,20 @@ const BloodPressureTracker = () => {
                     }
                   : null;
               })
-              .filter(Boolean) // Remove any null entries
+              .filter(Boolean)
               .sort((a, b) => a.datetime - b.datetime);
 
             setData(processedData);
             setError(null);
+            setFileUploaded(true);
           } catch (err) {
             setError("Error processing file: " + err.message);
+            setFileUploaded(false);
           }
         },
         error: (err) => {
           setError("Error parsing CSV: " + err.message);
+          setFileUploaded(false);
         },
       });
     }
@@ -87,61 +88,121 @@ const BloodPressureTracker = () => {
   const statistics = calculateStatistics();
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="mb-4">
-        <input type="file" accept=".csv" onChange={handleFileUpload} className="mb-4" />
-        {error && <p className="text-red-500">{error}</p>}
-      </div>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
+          <h1 className="text-3xl font-bold text-white">Visualize Blood Pressure Readings</h1>
+        </div>
 
-      {data.length > 0 && (
-        <>
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="border p-4 rounded">
-              <h3 className="text-lg font-semibold mb-2">Systolic Pressure</h3>
-              <p>Avg: {statistics.sys.avg} mmHg</p>
-              <p>Min: {statistics.sys.min} mmHg</p>
-              <p>Max: {statistics.sys.max} mmHg</p>
-            </div>
-            <div className="border p-4 rounded">
-              <h3 className="text-lg font-semibold mb-2">Diastolic Pressure</h3>
-              <p>Avg: {statistics.dia.avg} mmHg</p>
-              <p>Min: {statistics.dia.min} mmHg</p>
-              <p>Max: {statistics.dia.max} mmHg</p>
-            </div>
-            <div className="border p-4 rounded">
-              <h3 className="text-lg font-semibold mb-2">Pulse</h3>
-              <p>Avg: {statistics.pulse.avg} bpm</p>
-              <p>Min: {statistics.pulse.min} bpm</p>
-              <p>Max: {statistics.pulse.max} bpm</p>
-            </div>
+        <div className="p-6">
+          {/* File Upload Area */}
+          <div className="mb-6 bg-gray-50 border-2 border-dashed border-gray-300 p-4 rounded-lg">
+            <input
+              type="file"
+              accept=".csv"
+              onChange={handleFileUpload}
+              className="block w-full text-sm text-gray-500 
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-blue-50 file:text-blue-700
+                hover:file:bg-blue-100"
+            />
+            {error && <p className="mt-2 text-red-600 bg-red-50 p-2 rounded border border-red-200">{error}</p>}
           </div>
 
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="datetime"
-                tickFormatter={(time) => {
-                  const date = new Date(time);
-                  return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
-                }}
-              />
-              <YAxis yAxisId="left" />
-              <YAxis yAxisId="right" orientation="right" />
-              <Tooltip
-                labelFormatter={(time) => {
-                  const date = new Date(time);
-                  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
-                }}
-              />
-              <Legend />
-              <Line yAxisId="left" type="monotone" dataKey="sys" stroke="#8884d8" activeDot={{ r: 8 }} name="Systolic" />
-              <Line yAxisId="left" type="monotone" dataKey="dia" stroke="#82ca9d" name="Diastolic" />
-              <Line yAxisId="right" type="monotone" dataKey="pulse" stroke="#ffc658" name="Pulse" />
-            </LineChart>
-          </ResponsiveContainer>
-        </>
-      )}
+          {/* CSV File Upload Instructions */}
+          {!fileUploaded && (
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r-lg">
+              <div className="flex items-start">
+                <svg className="w-6 h-6 text-blue-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <h2 className="text-lg font-semibold text-blue-800 mb-2">How to Export CSV from OMRON App</h2>
+                  <ol className="list-decimal list-inside text-blue-700 space-y-1">
+                    <li>Open OMRON Connect app</li>
+                    <li>Select your blood pressure measurement history</li>
+                    <li>Look for "Export" measurement data or "Share" option</li>
+                    <li>Choose CSV file format</li>
+                    <li>Upload the exported CSV file here</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* data graph*/}
+          {data.length > 0 && (
+            <>
+              <div className="grid md:grid-cols-3 gap-4 mb-6">
+                {[
+                  {
+                    title: "Systolic Pressure",
+                    color: "bg-blue-100 text-blue-800",
+                    data: statistics.sys,
+                    unit: "mmHg",
+                  },
+                  {
+                    title: "Diastolic Pressure",
+                    color: "bg-green-100 text-green-800",
+                    data: statistics.dia,
+                    unit: "mmHg",
+                  },
+                  {
+                    title: "Pulse",
+                    color: "bg-red-100 text-red-800",
+                    data: statistics.pulse,
+                    unit: "bpm",
+                  },
+                ].map((section, index) => (
+                  <div key={index} className={`p-4 rounded-lg shadow-md ${section.color} transition transform hover:scale-105`}>
+                    <h3 className="text-lg font-semibold mb-2">{section.title}</h3>
+                    <p>
+                      Avg: {section.data.avg} {section.unit}
+                    </p>
+                    <p>
+                      Min: {section.data.min} {section.unit}
+                    </p>
+                    <p>
+                      Max: {section.data.max} {section.unit}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                <ResponsiveContainer width="100%" height={400}>
+                  <LineChart data={data}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis
+                      dataKey="datetime"
+                      tickFormatter={(time) => {
+                        const date = new Date(time);
+                        return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
+                      }}
+                      className="text-xs"
+                    />
+                    <YAxis yAxisId="left" />
+                    <YAxis yAxisId="right" orientation="right" />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "#f9f9f9", border: "1px solid #ddd" }}
+                      labelFormatter={(time) => {
+                        const date = new Date(time);
+                        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
+                      }}
+                    />
+                    <Legend />
+                    <Line yAxisId="left" type="monotone" dataKey="sys" stroke="#3b82f6" activeDot={{ r: 8 }} name="Systolic" />
+                    <Line yAxisId="left" type="monotone" dataKey="dia" stroke="#10b981" name="Diastolic" />
+                    <Line yAxisId="right" type="monotone" dataKey="pulse" stroke="#ef4444" name="Pulse" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
