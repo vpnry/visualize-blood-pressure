@@ -125,7 +125,13 @@ const BloodPressureTracker = () => {
                     <li>Select your blood pressure measurement history</li>
                     <li>Look for "Export" measurement data or "Share" option</li>
                     <li>Choose CSV file format</li>
-                    <li>Upload the exported CSV file here</li>
+                    <li>Load the file into this app to visualize your blood pressure data</li>
+                    <li>
+                      Your data remains completely private and never leaves your browser. This app source code is{" "}
+                      <a href="https://github.com/vpnry/visualize-blood-pressure" target="_blank" rel="noreferrer">
+                        [Here].
+                      </a>
+                    </li>
                   </ol>
                 </div>
               </div>
