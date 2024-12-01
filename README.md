@@ -9,13 +9,19 @@ Online demo: [https://vpnry.github.io/visualize-blood-pressure/](https://vpnry.g
 
 ![Visualize Blood Pressure Readings](vbp.png)
 
-## Privacy
+---
 
-- Your data remains completely private and never leaves your browser.
+## Privacy & Disclaimer
 
-- You can also [download this HTML app](https://github.com/vpnry/visualize-blood-pressure/archive/refs/heads/master.zip) and run it offline.
+- **Privacy First**: Your data remains completely private and never leaves your browser.
+
+- **Offline Access**: You can [download this HTML app](https://github.com/vpnry/visualize-blood-pressure/archive/refs/heads/master.zip) and run it offline.
   
-- You can also **download it's Android APK** in the [Release](https://github.com/vpnry/visualize-blood-pressure/releases):
+- **Android App**: You can also **download the Android APK** from the [Releases page](https://github.com/vpnry/visualize-blood-pressure/releases).  
+
+- This app was created primarily for **personal testing purposes**. While efforts have been made to ensure its functionality, **use it at your own risk**. The creator assumes no responsibility for any errors or misinterpretations of the data. Always consult a healthcare professional for medical advice.  
+
+---
 
 
 ## How to Export CSV from OMRON App

@@ -1,4 +1,17 @@
-# visualise_blood_pressure
+Flutter app
+
+
+## Privacy & Disclaimer
+
+- **Privacy First**: Your data remains completely private and never leaves your browser.
+
+- **Offline Access**: You can [download this HTML app](https://github.com/vpnry/visualize-blood-pressure/archive/refs/heads/master.zip) and run it offline.
+  
+- **Android App**: You can also **download the Android APK** from the [Releases page](https://github.com/vpnry/visualize-blood-pressure/releases).  
+
+- This app was created primarily for **personal testing purposes**. While efforts have been made to ensure its functionality, **use it at your own risk**. The creator assumes no responsibility for any errors or misinterpretations of the data. Always consult a healthcare professional for medical advice.  
+
+---
 
 ## How to build Android APK
 - To sign the app: 
