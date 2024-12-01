@@ -1,0 +1,4 @@
+storePassword=enteryourpassword
+keyPassword=enteryourpassword
+keyAlias=enterkeyalias
+storeFile=/home/path/to/android_keystore.jks

@@ -14,6 +14,8 @@ Online demo: [https://vpnry.github.io/visualize-blood-pressure/](https://vpnry.g
 - Your data remains completely private and never leaves your browser.
 
 - You can also [download this HTML app](https://github.com/vpnry/visualize-blood-pressure/archive/refs/heads/master.zip) and run it offline.
+  
+- You can also **download it's Android APK** in the [Release](https://github.com/vpnry/visualize-blood-pressure/releases):
 
 
 ## How to Export CSV from OMRON App

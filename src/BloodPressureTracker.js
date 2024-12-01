@@ -126,9 +126,9 @@ const BloodPressureTracker = () => {
                     <li>Choose CSV file format</li>
                     <li>Load the file into this app to visualize your blood pressure data</li>
                     <li>
-                      Your data remains completely private and never leaves your browser. This app source code is{" "}
+                      Your data remains completely private and never leaves your browser. Download Android APK and app source code:{" "}
                       <a href="https://github.com/vpnry/visualize-blood-pressure" target="_blank" rel="noreferrer">
-                        [Here].
+                        [HERE].
                       </a>
                     </li>
                   </ol>
