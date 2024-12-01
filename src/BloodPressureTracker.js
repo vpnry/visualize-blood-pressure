@@ -88,13 +88,12 @@ const BloodPressureTracker = () => {
   const statistics = calculateStatistics();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
-          <h1 className="text-3xl font-bold text-white">Visualize Blood Pressure Readings</h1>
+    <div className="min-h-screen bg-gray-100 p-2 sm:p-4">
+      <div className="max-w-full md:max-w-6xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 sm:p-4">
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Visualize Blood Pressure Readings</h1>
         </div>
-
-        <div className="p-6">
+        <div className="p-2 sm:p-4">
           {/* File Upload Area */}
           <div className="mb-6 bg-gray-50 border-2 border-dashed border-gray-300 p-4 rounded-lg">
             <input
